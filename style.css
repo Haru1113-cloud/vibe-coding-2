@@ -1,0 +1,523 @@
+/* =========================
+   Glassmorphism Theme v1
+   ========================= */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+:root{
+  --bg1:#6ab7d6;   /* 青緑 */
+  --bg2:#c56a6a;   /* 赤 */
+  --bg3:#1b2237;   /* 深い紺 */
+  --text: rgba(255,255,255,.92);
+  --muted: rgba(255,255,255,.68);
+
+  --glass: rgba(255,255,255,.10);
+  --glass2: rgba(255,255,255,.07);
+  --border: rgba(255,255,255,.18);
+  --border2: rgba(255,255,255,.26);
+
+  --shadow: 0 18px 60px rgba(0,0,0,.35);
+  --shadow2: 0 10px 30px rgba(0,0,0,.22);
+
+  --primary: rgba(120, 190, 255, .95);
+  --primary2: rgba(120, 190, 255, .18);
+
+  --danger: rgba(255, 110, 110, .22);
+  --dangerText: rgba(255, 210, 210, .95);
+
+  --radius: 22px;
+  --radius2: 16px;
+
+  --blur: 18px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  color:var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display","SF Pro Text","Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(1200px 700px at 15% 20%, rgba(106,183,214,.85), transparent 60%),
+              radial-gradient(900px 600px at 75% 35%, rgba(197,106,106,.70), transparent 60%),
+              radial-gradient(900px 900px at 50% 110%, rgba(27,34,55,.95), rgba(11,15,25,1));
+  overflow-x:hidden;
+}
+
+/* 背景の薄いライン（スクショの雰囲気） */
+body::before{
+  content:"";
+  position:fixed;
+  inset:-40%;
+  background:
+    linear-gradient(135deg, transparent 0 62%, rgba(255,120,120,.25) 62% 62.2%, transparent 62.2% 100%),
+    linear-gradient(135deg, transparent 0 74%, rgba(255,120,120,.18) 74% 74.2%, transparent 74.2% 100%);
+  transform: rotate(-10deg);
+  pointer-events:none;
+  opacity:.5;
+}
+
+/* ふわっと光る玉（任意演出） */
+body::after{
+  content:"";
+  position:fixed;
+  width:260px;
+  height:260px;
+  left: 10%;
+  top: 14%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), rgba(255,255,255,.10) 40%, transparent 70%);
+  filter: blur(1px);
+  opacity:.55;
+  pointer-events:none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body{
+    animation: bgFloat 14s ease-in-out infinite alternate;
+  }
+  @keyframes bgFloat{
+    from{ background-position: 0 0, 0 0, 0 0; }
+    to  { background-position: 20px -20px, -10px 10px, 0 0; }
+  }
+}
+
+/* ===== Layout ===== */
+.topHeader{
+  padding:18px 16px 30px;
+  margin-top: 0;
+  position: sticky;
+  top:0;
+  z-index:10;
+  background: linear-gradient(to bottom, rgba(10,14,25,.55), rgba(10,14,25,.18));
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  border-bottom: 1px solid rgba(255,255,255,.10);
+}
+.topTitle{
+  font-weight: 820;
+  letter-spacing: .2px;
+  font-size: 18px;
+  margin-top: 20px;
+}
+.topSub{
+  margin-top:6px;
+  font-size:12px;
+  color: var(--muted);
+}
+
+.content{
+  padding: 16px;
+  padding-bottom: 94px; /* bottom nav */
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.sectionTitle{ padding: 2px 4px; }
+.sectionTitle h2{
+  margin:0;
+  font-size:16px;
+  letter-spacing:.2px;
+}
+.sectionTitle p{
+  margin:6px 0 0;
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* ===== Panels (Glass Cards) ===== */
+.panel{
+  background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  padding: 16px;
+}
+
+.panelInner{
+  border-radius: var(--radius2);
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.05);
+  padding: 12px;
+}
+
+/* ===== Forms ===== */
+.row{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width:720px){
+  .row{ grid-template-columns: 1fr; }
+}
+
+.field{ display:grid; gap:6px; }
+.label{
+  font-size:12px;
+  color: rgba(255,255,255,.78);
+}
+.hint{
+  font-size:12px;
+  color: rgba(255,255,255,.58);
+}
+
+.input,.select{
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(10,14,25,.20);
+  color: var(--text);
+  outline:none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.10);
+}
+.input::placeholder{
+  color: rgba(255,255,255,.45);
+}
+.input:focus,.select:focus{
+  border-color: rgba(160,210,255,.55);
+  box-shadow: 0 0 0 4px rgba(120,190,255,.12);
+}
+
+/* Totals */
+.total{
+  font-size: 18px;
+  font-weight: 860;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: linear-gradient(180deg, rgba(120,190,255,.18), rgba(255,255,255,.05));
+}
+
+/* ===== Buttons ===== */
+.actions{ display:grid; gap:10px; margin-top: 10px; }
+
+.btnPrimary,.btn,.btnDanger{
+  padding: 12px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.18);
+  cursor:pointer;
+  font-weight: 820;
+  letter-spacing:.2px;
+  transition: transform .08s ease, filter .2s ease, background .2s ease;
+}
+.btnPrimary{
+  background: linear-gradient(135deg, rgba(120,190,255,.95), rgba(255,255,255,.20));
+  color: rgba(10,14,25,.88);
+  box-shadow: var(--shadow2);
+}
+.btnPrimary:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+  filter: grayscale(.35);
+}
+
+.btn{
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+}
+.btnDanger{
+  background: var(--danger);
+  color: var(--dangerText);
+}
+
+.btnPrimary:active,.btn:active,.btnDanger:active{
+  transform: translateY(1px);
+}
+
+.error{
+  color: rgba(255,220,220,.95);
+  background: rgba(255,110,110,.14);
+  border: 1px solid rgba(255,110,110,.28);
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 12px;
+}
+.hidden{ display:none; }
+
+.divider{
+  height:1px;
+  background: rgba(255,255,255,.14);
+  margin: 12px 0;
+}
+
+.fieldRow{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items:center;
+}
+
+/* ===== Tag chips ===== */
+.tagChips{
+  margin-top: 10px;
+  display:flex;
+  flex-wrap:wrap;
+  gap: 8px;
+}
+.tagChip{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.06);
+  font-size: 12px;
+}
+.tagDel{
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(10,14,25,.18);
+  color: var(--text);
+  border-radius: 999px;
+  width: 22px;
+  height: 22px;
+  cursor:pointer;
+  line-height:1;
+}
+
+/* ===== List ===== */
+.list{ display:grid; gap:10px; }
+.empty{
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px dashed rgba(255,255,255,.22);
+  background: rgba(255,255,255,.05);
+  color: rgba(255,255,255,.75);
+}
+
+.listItem{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items:start;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.06);
+  box-shadow: 0 8px 30px rgba(0,0,0,.18);
+}
+
+.listTop{
+  display:flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items:center;
+}
+
+.pill{
+  display:inline-flex;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(10,14,25,.18);
+  font-size: 12px;
+  color: rgba(255,255,255,.86);
+}
+
+.amount{
+  font-weight: 900;
+  letter-spacing:.2px;
+}
+
+.memo{
+  margin-top: 8px;
+  color: rgba(255,255,255,.85);
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+.meta{
+  margin-top: 8px;
+  font-size: 12px;
+  color: rgba(255,255,255,.58);
+}
+
+/* ===== Chart ===== */
+.chart{
+  display:grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+.barCol{ display:grid; gap:6px; }
+.barWrap{
+  height: 170px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(10,14,25,.18);
+  display:flex;
+  align-items:flex-end;
+  overflow:hidden;
+}
+.bar{
+  width: 100%;
+  background: linear-gradient(180deg, rgba(120,190,255,.95), rgba(255,255,255,.18));
+}
+.barLabel{
+  font-size: 12px;
+  color: rgba(255,255,255,.68);
+  text-align:center;
+}
+.barValue{
+  font-size: 12px;
+  font-weight: 820;
+  text-align:center;
+}
+
+/* ===== Bottom Nav ===== */
+.bottomNav{
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  margin: 0 auto;
+  max-width: 980px;
+
+  padding: 10px 12px 14px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+
+  background: linear-gradient(to top, rgba(10,14,25,.55), rgba(10,14,25,.10));
+  border-top: 1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+}
+
+.bottomNavItem{
+  text-decoration:none;
+  color: rgba(255,255,255,.78);
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 18px;
+  padding: 10px 12px;
+  display:grid;
+  justify-items:center;
+  gap: 6px;
+
+  background: rgba(255,255,255,.05);
+}
+
+.bottomNavItem.active{
+  color: rgba(10,14,25,.88);
+  border-color: rgba(255,255,255,.18);
+  background: linear-gradient(135deg, rgba(120,190,255,.85), rgba(255,255,255,.16));
+}
+
+.bottomNavIcon{ font-size: 18px; font-weight: 900; }
+.bottomNavLabel{ font-size: 12px; font-weight: 900; letter-spacing:.2px; }
+
+.topHeader {
+  padding-top: env(safe-area-inset-top);
+}
+.bottomNav {
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  .bottomNav{
+  /* 既存のままでOK、これだけ差し替え */
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+}
+
+.btnPrimary:hover,
+.btn:hover {
+  filter: brightness(1.08);
+}
+
+.btnPrimary:active,
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* ===== Calendar ===== */
+.calHeader{
+  display:grid;
+  grid-template-columns: auto 1fr auto;
+  align-items:center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.calBtn{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  font-size: 20px;
+  font-weight: 900;
+  padding: 0;
+}
+
+.calTitle{
+  display:grid;
+  gap: 2px;
+  text-align:center;
+}
+
+.calMonthText{
+  font-weight: 900;
+  letter-spacing: .2px;
+}
+
+.calWeekdays{
+  display:grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin: 10px 0 8px;
+  color: rgba(255,255,255,.70);
+  font-size: 12px;
+  text-align:center;
+}
+
+.calGrid{
+  display:grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.calCell{
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  border-radius: 16px;
+  min-height: 64px;
+  padding: 10px 10px;
+  color: rgba(255,255,255,.88);
+  text-align:left;
+}
+
+.calBlank{
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+.calDay{
+  cursor: pointer;
+  transition: transform .08s ease, filter .18s ease, background .18s ease;
+}
+
+.calDay:active{
+  transform: translateY(1px);
+}
+
+.calDayNum{
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.calDaySum{
+  margin-top: 6px;
+  font-size: 11px;
+  color: rgba(255,255,255,.70);
+}
+
+.calDay.hasSpend{
+  border-color: rgba(120,190,255,.35);
+  background: rgba(120,190,255,.10);
+}
+
+.calDay.isToday{
+  box-shadow: 0 0 0 2px rgba(255,255,255,.10) inset;
+}
+
+.calDay.isSelected{
+  border-color: rgba(255,255,255,.30);
+  background: rgba(255,255,255,.12);
+}
+

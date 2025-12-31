@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0f19" />
+
+  <title>生活費メモ - 週</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./style.css" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+</head>
+<body>
+  <header class="topHeader">
+    <div class="topTitle">生活費メモ</div>
+    <div class="topSub">週の合計 → 7日グラフ</div>
+  </header>
+
+  <main class="content">
+    <section class="panel">
+      <div class="row">
+        <div class="field">
+          <label class="label">週の終了日</label>
+          <input id="endDate" class="input" type="date" />
+          <div class="hint">この日を含む過去7日を表示</div>
+        </div>
+
+        <div class="field">
+          <label class="label">週合計</label>
+          <div id="weekTotal" class="total">¥0</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sectionTitle">
+      <h2>7日間の推移</h2>
+      <p>棒が高い日 = 使いすぎの日</p>
+    </section>
+
+    <section class="panel">
+      <div id="chart" class="chart"></div>
+    </section>
+  </main>
+
+ <nav class="bottomNav">
+  <a class="bottomNavItem active" href="./index.html" aria-current="page">
+    <span class="bottomNavIcon" aria-hidden>＋</span>
+    <span class="bottomNavLabel">今日</span>
+  </a>
+  <a class="bottomNavItem" href="./week.html">
+    <span class="bottomNavIcon" aria-hidden>▦</span>
+    <span class="bottomNavLabel">週</span>
+  </a>
+  <a class="bottomNavItem" href="./calendar.html">
+    <span class="bottomNavIcon" aria-hidden>▣</span>
+    <span class="bottomNavLabel">月</span>
+  </a>
+</nav>
+
+
+  <script src="./storage.js"></script>
+  <script src="./week.js"></script>
+</body>
+</html>

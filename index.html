@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0f19" />
+
+  <title>生活費メモ</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./style.css">
+
+
+
+
+  <!-- iOS: ホーム画面でアプリっぽく -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <!-- できれば用意：icons/icon-180.png を作ったらここも差し替え -->
+  <!-- <link rel="apple-touch-icon" href="./icons/icon-180.png"> -->
+</head>
+<body>
+  <header class="topHeader">
+    <div class="topTitle">生活費メモ</div>
+    <div class="topSub">今日の入力 → 合計 → 明細</div>
+  </header>
+
+  <main class="content">
+    <section class="panel">
+      <div class="row">
+        <div class="field">
+          <label class="label">日付</label>
+          <input id="date" class="input" type="date" />
+        </div>
+
+        <div class="field">
+          <label class="label">今日の合計</label>
+          <div id="todayTotal" class="total">¥0</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <section class="panelInner">
+        <div class="field">
+          <label class="label">タグ</label>
+          <select id="tagSelect" class="select"></select>
+          <div class="hint">タグは使い回しできるよ</div>
+        </div>
+
+        <div class="fieldRow">
+          <input id="newTag" class="input" placeholder="新しいタグ（例：美容 / 書籍 / 医療）" />
+          <button id="addTagBtn" class="btn">追加</button>
+        </div>
+        <div id="tagError" class="error hidden"></div>
+
+        <div id="tagChips" class="tagChips"></div>
+      </section>
+
+      <div class="divider"></div>
+
+      <div class="row">
+        <div class="field">
+          <label class="label">金額（円）</label>
+          <input id="amount" class="input" inputmode="numeric" placeholder="例：1200" />
+        </div>
+        <div class="field">
+          <label class="label">メモ（任意）</label>
+          <input id="memo" class="input" placeholder="例：コンビニ / ランチ / 本" />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="addExpenseBtn" class="btnPrimary" disabled>追加する</button>
+        <div id="expenseError" class="error hidden"></div>
+      </div>
+    </section>
+
+    <section class="sectionTitle">
+      <h2>今日の明細</h2>
+      <p>タグ / 金額 / メモ</p>
+    </section>
+
+    <section id="expenseList" class="list"></section>
+  </main>
+
+  <nav class="bottomNav">
+  <a class="bottomNavItem active" href="./index.html" aria-current="page">
+    <span class="bottomNavIcon" aria-hidden>＋</span>
+    <span class="bottomNavLabel">今日</span>
+  </a>
+  <a class="bottomNavItem" href="./week.html">
+    <span class="bottomNavIcon" aria-hidden>▦</span>
+    <span class="bottomNavLabel">週</span>
+  </a>
+  <a class="bottomNavItem" href="./calendar.html">
+    <span class="bottomNavIcon" aria-hidden>▣</span>
+    <span class="bottomNavLabel">月</span>
+  </a>
+</nav>
+
+
+  <script src="./storage.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
